@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-950 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg bg-gray-500 shadow-lg rounded-lg p-8">
+      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">
+        Register User
+      </h2>
+
+      <!-- Error message -->
+      <% if (typeof error !== "undefined" && error) { %>
+        <p class="mb-4 text-red-600 text-center font-medium"><%= error %></p>
+      <% } %>
+
+      <!-- Registration Form -->
+      <form action="/user/login" method="POST" class="space-y-6">
+      
+
+        <!-- Email -->
+        <div>
+          <label
+            for="email"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Email</label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label
+            for="password"
+            class="block mb-2 text-sm font-medium text-gray-900"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          />
+        </div>
+
+        <!-- Submit button -->
+        <button
+          type="submit"
+          class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Login
+        </button>
+      </form>
+
+      <!-- Link to users list -->
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  </body>
+</html>
