@@ -4,11 +4,7 @@ const route = express.Router();
 const usermodel = require("../models/user.model");
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
-
-// /user/
-route.get("/", (req, res) => {
-  res.render("index");
-});
+ 
 
 route.get("/register", (req, res) => {
   res.render("register");
@@ -57,8 +53,7 @@ route.get("/login", (req, res) => {
 });
 
 
-route.post(
-  "/login",
+route.post( "/login",
   [
     body("email").trim().isEmail().withMessage("Enter a valid email"),
     body("password")
@@ -107,5 +102,15 @@ route.post(
   }
 );
 
+route.get('/user-deta',async(req,res)=>{
+const users = await usermodel.find()
+res.render('allusers',{users})
+})
+route.get('/delete/:id',async(req,res)=>{
+  await usermodel.findByIdAndDelete(req.params.id)
+res.redirect("/user/user-deta")
+})
 
+
+ 
 module.exports = route;
