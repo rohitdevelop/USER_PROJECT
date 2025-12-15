@@ -2,15 +2,15 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const route = express.Router();
 const usermodel = require("../models/user.model");
-const bcrypt = require('bcrypt')
-const jwt = require("jsonwebtoken")
- 
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 route.get("/register", (req, res) => {
   res.render("register");
 });
 
-route.post("/register",
+route.post(
+  "/register",
   [
     body("email")
       .trim()
@@ -36,7 +36,7 @@ route.post("/register",
         .json({ errors: errors.array(), message: "invalid" });
     }
     const { name, email, password } = req.body;
- const hashpasword = await bcrypt.hash(password, 10)
+    const hashpasword = await bcrypt.hash(password, 10);
     const newuser = await usermodel.create({
       name,
       email,
@@ -47,25 +47,23 @@ route.post("/register",
   }
 );
 
-
 route.get("/login", (req, res) => {
   res.render("login");
 });
 
-
-route.post( "/login",
+route.post(
+  "/login",
   [
     body("email").trim().isEmail().withMessage("Enter a valid email"),
-    body("password")
-      .trim()
-      .notEmpty()
-      .withMessage("Password is required"),
+    body("password").trim().notEmpty().withMessage("Password is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array(), message: "Invalid data" });
+      return res
+        .status(400)
+        .json({ errors: errors.array(), message: "Invalid data" });
     }
 
     const { email, password } = req.body;
@@ -92,25 +90,40 @@ route.post( "/login",
         { expiresIn: "5h" } // Token expires in 1 hour
       );
 
- 
-      res.cookie('token', token)
-      res.send("logdin")
-
+      res.cookie("token", token);
+      res.render("loginsuccess");
     } catch (err) {
       res.status(500).json({ message: "Server error", error: err });
     }
   }
 );
 
-route.get('/user-deta',async(req,res)=>{
-const users = await usermodel.find()
-res.render('allusers',{users})
-})
-route.get('/delete/:id',async(req,res)=>{
-  await usermodel.findByIdAndDelete(req.params.id)
-res.redirect("/user/user-deta")
-})
+route.get("/user-deta", async (req, res) => {
+  const users = await usermodel.find();
+  res.render("allusers", { users });
+});
 
 
- 
+route.get("/delete/:id", async (req, res) => {
+  await usermodel.findByIdAndDelete(req.params.id);
+  res.redirect("/user/user-deta");
+});
+
+
+route.get("/edit/:id", async (req, res) => {
+  const user = await usermodel.findById(req.params.id);
+  res.render("edit", { user });
+});
+
+route.post("/edit/:id", async (req, res) => {
+  const { name, email } = req.body;
+
+  await usermodel.findByIdAndUpdate(req.params.id, {
+    name,
+    email,
+  });
+
+  res.redirect("/user/user-deta");
+});
+
 module.exports = route;

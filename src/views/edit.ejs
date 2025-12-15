@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit User</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="min-h-screen bg-gray-900 flex items-center justify-center text-white">
+
+  <form
+    action="/user/edit/<%= user._id %>"
+    method="POST"
+    class="bg-gray-800 p-8 rounded-xl w-full max-w-md shadow-xl"
+  >
+    <h2 class="text-2xl font-bold mb-6 text-center">Edit User</h2>
+
+    <!-- NAME -->
+    <div class="mb-4">
+      <label class="block mb-1 text-sm">Name</label>
+      <input
+        type="text"
+        name="name"
+        value="<%= user.name %>"
+        required
+        class="w-full px-4 py-2 rounded bg-gray-700 outline-none"
+      />
+    </div>
+
+    <!-- EMAIL -->
+    <div class="mb-6">
+      <label class="block mb-1 text-sm">Email</label>
+      <input
+        type="email"
+        name="email"
+        value="<%= user.email %>"
+        required
+        class="w-full px-4 py-2 rounded bg-gray-700 outline-none"
+      />
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="flex gap-4">
+      <button
+        type="submit"
+        class="flex-1 bg-blue-600 py-2 rounded hover:bg-blue-700 transition"
+      >
+        Save
+      </button>
+
+      <a
+        href="/user/user-deta"
+        class="flex-1 text-center bg-gray-600 py-2 rounded hover:bg-gray-700 transition"
+      >
+        Cancel
+      </a>
+    </div>
+  </form>
+
+</body>
+</html>

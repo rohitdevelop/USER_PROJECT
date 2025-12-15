@@ -41,7 +41,7 @@ const upload = multer({
 });
 
 // ✅ Render Home Page
-route.get("/home", (req, res) => {
+route.get("/", (req, res) => {
   res.render("home");
 });
 

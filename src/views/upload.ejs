@@ -6,9 +6,9 @@
   <title>File Upload Result</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-r from-blue-50 to-purple-50 min-h-screen flex items-center justify-center">
+<body class="bg-gray-900 flex justify-center items-center h-screen">
 
-  <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full text-center">
+  <div class="bg-gray-700 shadow-2xl rounded-2xl p-8 max-w-md w-full text-center">
     
     <% if (success) { %>
       <!-- ✅ Success Alert -->
@@ -20,12 +20,12 @@
       <!-- Uploaded Image Preview -->
       <div class="mb-6">
         <img src="<%= path %>" alt="Uploaded File" class="mx-auto rounded-lg border shadow-md max-h-60 object-contain" />
-        <p class="mt-4 text-gray-700 font-medium">Filename: <span class="text-blue-600"><%= filename %></span></p>
+        <p class="mt-4 text-gray-100 font-medium">Filename: <span class="text-blue-600"><%= filename %></span></p>
       </div>
 
       <!-- Buttons -->
       <div class="flex justify-center gap-4">
-        <a href="/home" class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Upload Another</a>
+        <a href="/" class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">Upload Another</a>
         <a href="/" class="px-5 py-2 bg-gray-300 text-gray-800 rounded-lg shadow hover:bg-gray-400 transition">Go Home</a>
       </div>
 
