@@ -15,7 +15,7 @@ const connectDB = require("./src/config/db");
 // Connect to MongoDB
 connectDB();
 
-// Initialize Express
+// Initialize Express~
 const app = express();
 
 // Middleware
