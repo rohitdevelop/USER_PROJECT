@@ -123,7 +123,7 @@ route.post("/edit/:id", async (req, res) => {
     email,
   });
 
-  res.redirect("/user/user-deta");
+  res.redirect("/user-deta");
 });
 
 module.exports = route;
