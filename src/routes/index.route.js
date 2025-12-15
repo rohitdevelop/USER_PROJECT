@@ -46,20 +46,29 @@ route.get("/", (req, res) => {
 });
 
 // ✅ Handle Upload
-route.post("/upload", upload.single("file"), (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ success: false, msg: "No file uploaded" });
+route.post("/upload", (req, res) => {
+  upload.single("file")(req, res, (err) => {
+    if (err) {
+      return res.render("upload", {
+        success: false,
+        error: err.message,
+      });
     }
 
-      res.render("upload", {
+    if (!req.file) {
+      return res.render("upload", {
+        success: false,
+        error: "No file selected",
+      });
+    }
+
+    res.render("upload", {
       success: true,
       filename: req.file.filename,
       path: `/uploads/${req.file.filename}`,
     });
-  } catch (err) {
-    res.status(500).json({ success: false, msg: err.message });
-  }
+  });
 });
+
 
 module.exports = route;
