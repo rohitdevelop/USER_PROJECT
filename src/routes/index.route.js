@@ -42,7 +42,7 @@ const upload = multer({
 
 // ✅ Render Home Page
 route.get("/", (req, res) => {
-  res.render("register");
+  res.render("home");
 });
 
 // ✅ Handle Upload
